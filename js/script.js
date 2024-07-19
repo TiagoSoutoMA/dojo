@@ -4,6 +4,17 @@ document.addEventListener("DOMContentLoaded", async () => {
 		.then((data) => {
 			const pokemonContainer =
 				document.getElementById("pokemonContainer");
-			console.log(data.results);
+			data.results.forEach(pokemon => {
+                fetch(pokemon.url)
+                .then(response => response.json())
+                .then(data => {
+                    const pokemonDiv = document.createElement("div");
+                    pokemonContainer.appendChild(pokemonDiv);
+                    const image = document.createElement("img");
+                    image.src = data.sprites.front_default;
+                    pokemonDiv.appendChild(image);
+                })
+                
+            });
 		});
 });
